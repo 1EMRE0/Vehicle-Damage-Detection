@@ -10,12 +10,12 @@
         public double[] bbox { get; set; }
 
         // Ek sütunlar (örnek amaçlı statik değerler, sonradan Python'dan alınabilir)
-        public string islem { get; set; }
-        public double tamir_suresi { get; set; }
-        public double soktak_suresi { get; set; }
-        public double boya_suresi { get; set; }
-        public string yogunluk { get; set; }
-        public string eminlik { get; set; }
+        public string action { get; set; }
+        public double repair_duration { get; set; }
+        public double disassembly_time { get; set; }
+        public double paint_duration { get; set; }
+        public string severity { get; set; }
+        public string confidence_level { get; set; }
 
 
     }

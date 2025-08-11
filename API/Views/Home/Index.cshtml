@@ -41,14 +41,14 @@
     <table class="table table-bordered">
         <thead class="table-dark">
             <tr>
-                <th>Parça</th>
-                <th>Hasarlar</th>
-                <th>İşlem</th>
-                <th>Tamir Süresi</th>
-                <th>Sök/Tak Süresi</th>
-                <th>Boya Süresi</th>
-                <th>Yoğunluk</th>
-                <th>Eminlik</th>
+                <th>Part</th>
+                <th>Damage</th>
+                <th>action</th>
+                <th>Repair Duration</th>
+                <th>Disassembly Time</th>
+                <th>Paint Duration</th>
+                <th>Severity</th>
+                <th>confidence_level</th>
             </tr>
         </thead>
         <tbody>
@@ -57,12 +57,12 @@
                 <tr>
                     <td>@item.part</td>
                     <td>@item.damage_type</td>
-                    <td>@item.islem</td>
-                    <td>@item.tamir_suresi</td>
-                    <td>@item.soktak_suresi</td>
-                    <td>@item.boya_suresi</td>
-                    <td>@item.yogunluk</td>
-                    <td>@item.eminlik</td>
+                    <td>@item.action</td>
+                    <td>@item.repair_duration</td>
+                    <td>@item.disassembly_time</td>
+                    <td>@item.paint_duration</td>
+                    <td>@item.severity</td>
+                    <td>@item.confidence_level</td>
                 </tr>
             }
         </tbody>

@@ -51,18 +51,25 @@ namespace HasarTespitiMVC.Controllers
                
                 var parsed = JsonSerializer.Deserialize<PredictResponse>(responseString);
 
+                if (parsed.status == "fail")
+                {
+                    ViewBag.Hata = parsed.message;
+                    ViewBag.ImageBase64 = LastImageBase64;
+                    return View("Index", new List<DamageResult>());
+                }
+
                 results = parsed.results ?? new();
                 LastImageBase64 = parsed.image_base64;
                 ViewBag.ImageBase64 = LastImageBase64;
 
                 foreach (var item in results)
                 {
-                    item.islem = item.iou > 0.8 ? "deðiþim" : "onarým";
-                    item.tamir_suresi = item.iou > 0.8 ? 0 : Math.Round(RandomDouble(0.5, 1.0), 2);
-                    item.soktak_suresi = item.iou > 0.8 ? 0.84 : 0;
-                    item.boya_suresi = item.iou > 0.5 ? 2.59 : 0.5;
-                    item.yogunluk = item.iou > 0.9 ? "100%" : $"{(int)(item.iou * 100)}%";
-                    item.eminlik = $"{(int)(item.iou * 100)}%";
+                    item.action = item.iou > 0.8 ? "deðiþim" : "onarým";
+                    item.repair_duration = item.iou > 0.8 ? 0 : Math.Round(RandomDouble(0.5, 1.0), 2);
+                    item.disassembly_time = item.iou > 0.8 ? 0.84 : 0;
+                    item.paint_duration = item.iou > 0.5 ? 2.59 : 0.5;
+                    item.severity = item.iou > 0.9 ? "100%" : $"{(int)(item.iou * 100)}%";
+                    item.confidence_level = $"{(int)(item.iou * 100)}%";
                 }
             }
             catch (Exception ex)
