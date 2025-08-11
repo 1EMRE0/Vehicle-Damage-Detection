@@ -1,18 +1,31 @@
-using Microsoft.AspNetCore.Mvc;
+using API.Data;
+using API.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System;
-using System.IO;
-using HasarTespitiMVC.Models;
 
-namespace HasarTespitiMVC.Controllers
+namespace API.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly AppDbContext _context;
+
+        public HomeController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+
+
+
+
         public static string LastImageBase64 = "";
 
         [HttpGet]
@@ -64,17 +77,26 @@ namespace HasarTespitiMVC.Controllers
 
                 foreach (var item in results)
                 {
-                    item.action = item.iou > 0.8 ? "deðiþim" : "onarým";
+                    item.damage_action = item.iou > 0.8 ? "deðiþim" : "onarým";
                     item.repair_duration = item.iou > 0.8 ? 0 : Math.Round(RandomDouble(0.5, 1.0), 2);
                     item.disassembly_time = item.iou > 0.8 ? 0.84 : 0;
                     item.paint_duration = item.iou > 0.5 ? 2.59 : 0.5;
                     item.severity = item.iou > 0.9 ? "100%" : $"{(int)(item.iou * 100)}%";
                     item.confidence_level = $"{(int)(item.iou * 100)}%";
                 }
+               
+                
+
             }
             catch (Exception ex)
             {
                 ViewBag.Hata = "Hata oluþtu: " + ex.Message;
+            }
+
+            if (results.Any())
+            {
+                _context.DamageResults.AddRange(results);
+                _context.SaveChanges();
             }
 
             return View("Index", results);

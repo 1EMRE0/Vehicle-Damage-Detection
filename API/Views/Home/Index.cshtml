@@ -1,4 +1,4 @@
-﻿@model List<HasarTespitiMVC.Models.DamageResult>
+﻿@model List<API.Models.DamageResult>
 
 <h2>🚘 Tespit Sonuçları</h2>
 
@@ -43,7 +43,7 @@
             <tr>
                 <th>Part</th>
                 <th>Damage</th>
-                <th>action</th>
+                <th>damage_action</th>
                 <th>Repair Duration</th>
                 <th>Disassembly Time</th>
                 <th>Paint Duration</th>
@@ -57,7 +57,7 @@
                 <tr>
                     <td>@item.part</td>
                     <td>@item.damage_type</td>
-                    <td>@item.action</td>
+                    <td>@item.damage_action</td>
                     <td>@item.repair_duration</td>
                     <td>@item.disassembly_time</td>
                     <td>@item.paint_duration</td>

@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 
 
-namespace HasarTespitiMVC.Models
+namespace API.Models
 {
     public class PredictResponse
     {   
