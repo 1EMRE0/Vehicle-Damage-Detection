@@ -1,7 +1,8 @@
 ﻿namespace HasarTespitiMVC.Models
 {
     public class DamageResult
-    {
+    {   
+        public int Id { get; set; }  
         public int damage_id { get; set; }
         public string damage_type { get; set; }
         public string part { get; set; }
@@ -15,5 +16,7 @@
         public double boya_suresi { get; set; }
         public string yogunluk { get; set; }
         public string eminlik { get; set; }
+
+
     }
 }
