@@ -1,0 +1,70 @@
+﻿@model List<HasarTespitiMVC.Models.DamageResult>
+
+<h2>🚘 Tespit Sonuçları</h2>
+
+@if (ViewBag.Hata != null)
+{
+    <div class="alert alert-danger">@ViewBag.Hata</div>
+}
+
+<form method="post" enctype="multipart/form-data" asp-action="Upload" class="mb-4">
+    <div class="input-group">
+        <input type="file" name="imageFile" accept="image/*" class="form-control" required>
+        <button type="submit" class="btn btn-primary">🔍 Hasar Tespit Et</button>
+    </div>
+</form>
+
+<img id="preview" style="display:none; max-width: 100%; margin-bottom: 10px;" />
+
+<script>
+    document.querySelector("input[type='file']").addEventListener("change", function (e) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const img = document.getElementById("preview");
+            img.src = event.target.result;
+            img.style.display = "block";
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    });
+</script>
+
+
+@if (Model != null && Model.Any())
+{
+    <h4 class="mt-4">📷 Tespit Edilen Görsel:</h4>
+
+    @if (!string.IsNullOrEmpty(ViewBag.ImageBase64))
+    {
+        <img src="data:image/jpeg;base64,@ViewBag.ImageBase64" class="img-fluid mb-4" style="max-width: 100%; border: 2px solid #444;" />
+    }
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Parça</th>
+                <th>Hasarlar</th>
+                <th>İşlem</th>
+                <th>Tamir Süresi</th>
+                <th>Sök/Tak Süresi</th>
+                <th>Boya Süresi</th>
+                <th>Yoğunluk</th>
+                <th>Eminlik</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.part</td>
+                    <td>@item.damage_type</td>
+                    <td>@item.islem</td>
+                    <td>@item.tamir_suresi</td>
+                    <td>@item.soktak_suresi</td>
+                    <td>@item.boya_suresi</td>
+                    <td>@item.yogunluk</td>
+                    <td>@item.eminlik</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
