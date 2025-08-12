@@ -8,35 +8,56 @@
 }
 
 <form method="post" enctype="multipart/form-data" asp-action="Upload" class="mb-4">
+    @Html.AntiForgeryToken()
     <div class="input-group">
-        <input type="file" name="imageFile" accept="image/*" class="form-control" required>
+        <input type="file" name="imageFile" accept="image/*" class="form-control" required />
         <button type="submit" class="btn btn-primary">🔍 Hasar Tespit Et</button>
     </div>
 </form>
 
-<img id="preview" style="display:none; max-width: 100%; margin-bottom: 10px;" />
+
+<img id="preview" style="display:none; max-width: 50%; margin-bottom: 10px;" />
 
 <script>
     document.querySelector("input[type='file']").addEventListener("change", function (e) {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
         const reader = new FileReader();
         reader.onload = function (event) {
             const img = document.getElementById("preview");
             img.src = event.target.result;
             img.style.display = "block";
         };
-        reader.readAsDataURL(e.target.files[0]);
+        reader.readAsDataURL(file);
     });
 </script>
 
 
+@if (!string.IsNullOrEmpty(ViewBag.OriginalImageBase64) || !string.IsNullOrEmpty(ViewBag.ImageBase64))
+{
+    <div class="row g-3 my-3">
+        <div class="col-md-6">
+            <h5>📥 Yüklenen Görsel</h5>
+            @if (!string.IsNullOrEmpty(ViewBag.OriginalImageBase64))
+            {
+                <img src="data:image/jpeg;base64,@ViewBag.OriginalImageBase64"
+                     class="img-fluid rounded border mb-3" style="max-width:100%;" />
+            }
+        </div>
+        <div class="col-md-6">
+            <h5>🔧 Tespit Sonucu</h5>
+            @if (!string.IsNullOrEmpty(ViewBag.ImageBase64))
+            {
+                <img src="data:image/jpeg;base64,@ViewBag.ImageBase64"
+                     class="img-fluid rounded border mb-3" style="max-width:100%;" />
+            }
+        </div>
+    </div>
+}
+
 @if (Model != null && Model.Any())
 {
-    <h4 class="mt-4">📷 Tespit Edilen Görsel:</h4>
-
-    @if (!string.IsNullOrEmpty(ViewBag.ImageBase64))
-    {
-        <img src="data:image/jpeg;base64,@ViewBag.ImageBase64" class="img-fluid mb-4" style="max-width: 100%; border: 2px solid #444;" />
-    }
+    <h4 class="mt-4">📋 Tespit Detayları</h4>
 
     <table class="table table-bordered">
         <thead class="table-dark">
