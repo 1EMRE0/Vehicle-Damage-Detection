@@ -8,6 +8,6 @@ namespace HasarTespiti.Domain.Entities
 {
     internal class AppUser
     {
-
+       
     }
 }
