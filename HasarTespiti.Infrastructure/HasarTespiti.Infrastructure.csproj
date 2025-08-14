@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HasarTespiti.Application\HasarTespiti.Application.csproj" />
+    <ProjectReference Include="..\HasarTespiti.Domain\HasarTespiti.Domain.csproj" />
+    <ProjectReference Include="..\HasarTespiti.Shared\HasarTespiti.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Inference\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Security\" />
+    <Folder Include="Persistence\Context\" />
+    <Folder Include="Persistence\Configurations\" />
+    <Folder Include="Persistence\Migrations\" />
+    <Folder Include="Storage\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
+</Project>
