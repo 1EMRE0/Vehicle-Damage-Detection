@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HasarTespiti.Domain.Entities
 {
-    internal class Photo
+    public class Photo
     {
         public Guid Id { get; set; }
         public string OriginalPath { get; set; } = "";     // kullanıcının yüklediği fotoğraf yolu.
@@ -19,7 +19,7 @@ namespace HasarTespiti.Domain.Entities
 
         public AppUser UploadedBy { get; set; } = null!;
 
-
+        public ICollection<Prediction> Predictions { get; set; } = new List<Prediction>();
     }
 }
 

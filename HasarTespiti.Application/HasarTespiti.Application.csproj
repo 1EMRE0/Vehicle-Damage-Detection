@@ -15,8 +15,10 @@
     <Folder Include="Abstractions\" />
     <Folder Include="DTOs\" />
     <Folder Include="Behaviors\" />
-    <Folder Include="Contracts\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
   </ItemGroup>
 
 </Project>

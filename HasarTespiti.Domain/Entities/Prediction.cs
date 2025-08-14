@@ -7,7 +7,7 @@ using HasarTespiti.Domain.Enums;
 
 namespace HasarTespiti.Domain.Entities
 {
-    internal class Prediction
+    public class Prediction
     {
         public Guid Id { get; set; }
 

@@ -6,8 +6,29 @@ using System.Threading.Tasks;
 
 namespace HasarTespiti.Domain.Entities
 {
-    internal class AppUser
+    public class AppUser
     {
-       
+        public Guid Id { get; set; }
+
+        public string Email { get; set; } = "";
+
+        public ICollection<Photo> Photos { get; set; } = new List<Photo>();
+
+        
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// sisteme giriş yapan ya da foto yükleyen her kullanıcıyı temsl eder
+// bir kullanıcı birden fazla foto yükleyebilir.
